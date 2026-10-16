@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Bell, Clock, House, Menu, MoreVertical, Search, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,8 +14,11 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { Avatar } from "@/components/avatar";
+import { LogoMark } from "@/components/logo-mark";
 import {
   chips,
+  isSectionId,
   sectionCopy,
   videos,
   type ChipId,
@@ -25,9 +30,11 @@ import { cn } from "@/lib/utils";
 const narrowQuery = "(max-width: 1023px)";
 
 export function MeowHome() {
-  const [section, setSection] = useState<SectionId>("home");
+  const searchParams = useSearchParams();
+  const paramSection = searchParams.get("section");
+  const [section, setSection] = useState<SectionId>(isSectionId(paramSection) ? paramSection : "home");
   const [chip, setChip] = useState<ChipId>("all");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notice, setNotice] = useState("");
@@ -244,10 +251,9 @@ function VideoCard({
 }) {
   return (
     <article className="group">
-      <button
-        type="button"
+      <Link
+        href={`/watch/${video.id}`}
         className="block w-full rounded-xl text-left outline-none focus-visible:ring-2 focus-visible:ring-[#e36c28] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fcfaf5]"
-        onClick={() => onNotice(`Queued ${video.title}`)}
       >
         <div className="relative aspect-video overflow-hidden rounded-xl bg-[#efeae4]">
           <Image
@@ -263,19 +269,12 @@ function VideoCard({
             {video.duration}
           </span>
         </div>
-      </button>
+      </Link>
       <div className="mt-3 flex items-start gap-3">
-        <Image
-          src={video.avatar}
-          alt=""
-          width={44}
-          height={44}
-          className="size-11 shrink-0 rounded-full object-cover"
-        />
-        <button
-          type="button"
+        <Avatar src={video.avatar} className="size-11" />
+        <Link
+          href={`/watch/${video.id}`}
           className="min-w-0 flex-1 rounded-lg text-left outline-none focus-visible:ring-2 focus-visible:ring-[#e36c28]"
-          onClick={() => onNotice(`Queued ${video.title}`)}
         >
           <h2 className="line-clamp-2 text-base leading-5 font-semibold text-[#1a1a1f] group-hover:text-[#c65a1c]">
             {video.title}
@@ -284,7 +283,7 @@ function VideoCard({
           <p className="mt-0.5 text-[13px] leading-4 text-[#8a8682]">
             {video.views} • {video.when}
           </p>
-        </button>
+        </Link>
         <VideoMenu title={video.title} onNotice={onNotice} />
       </div>
     </article>
@@ -558,26 +557,9 @@ function HeaderActions({ onNotice }: { onNotice: (message: string) => void }) {
         aria-label="Your channel"
         onClick={() => onNotice("This is your MeowTube channel")}
       >
-        <Image
-          src="/avatars/user.jpg"
-          alt=""
-          width={40}
-          height={40}
-          className="size-10 object-cover"
-        />
+        <Avatar src="/avatars/user.jpg" className="size-10" />
       </Button>
     </>
-  );
-}
-
-function LogoMark() {
-  return (
-    <svg viewBox="0 0 46 42" className="size-10 shrink-0" aria-hidden>
-      <path fill="#e36c28" d="M8 16.5 12.2 6.2c.4-.9 1.7-.9 2.1 0L18.2 15" />
-      <path fill="#e36c28" d="M27.6 15 31.6 6.2c.4-.9 1.7-.9 2.1 0L38 16.5" />
-      <rect x="2" y="13" width="42" height="27" rx="8" fill="#e36c28" />
-      <path fill="#fff" d="M18 19.2v13.2l13.2-6.6z" />
-    </svg>
   );
 }
 

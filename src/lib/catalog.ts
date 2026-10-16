@@ -2,6 +2,15 @@ export type ChipId = "all" | "funny" | "kittens" | "orange" | "sleepy" | "birds"
 
 export type SectionId = "home" | "shorts" | "subscriptions" | "watch-later" | "liked";
 
+export type Comment = {
+  id: string;
+  handle: string;
+  avatar: string;
+  when: string;
+  text: string;
+  likes: number;
+};
+
 export type Video = {
   id: string;
   title: string;
@@ -13,6 +22,11 @@ export type Video = {
   avatar: string;
   alt: string;
   tags: Exclude<ChipId, "all">[];
+  subscribers: string;
+  likes: number;
+  description: string;
+  commentCount: number;
+  comments: Comment[];
 };
 
 export const chips: { id: ChipId; label: string }[] = [
@@ -36,6 +50,20 @@ export const videos: Video[] = [
     avatar: "/avatars/boxed.jpg",
     alt: "Orange tabby in a cardboard box reaching a paw toward the camera",
     tags: ["funny", "orange"],
+    subscribers: "128K subscribers",
+    likes: 42000,
+    description: "One box. One cat. Absolutely no plans to leave.",
+    commentCount: 1284,
+    comments: [
+      {
+        id: "box-nap",
+        handle: "@napclub",
+        avatar: "/avatars/nap.jpg",
+        when: "2 weeks ago",
+        text: "The box was clearly made for him.",
+        likes: 3100,
+      },
+    ],
   },
   {
     id: "kittens",
@@ -48,6 +76,20 @@ export const videos: Video[] = [
     avatar: "/avatars/prints.jpg",
     alt: "Three tiny kittens asleep under a cream knit blanket",
     tags: ["kittens", "sleepy"],
+    subscribers: "86K subscribers",
+    likes: 18600,
+    description: "Three kittens. One blanket. Zero interest in being awake.",
+    commentCount: 642,
+    comments: [
+      {
+        id: "kittens-box",
+        handle: "@boxedwhiskers",
+        avatar: "/avatars/boxed.jpg",
+        when: "3 weeks ago",
+        text: "They dreamed through the entire blanket.",
+        likes: 890,
+      },
+    ],
   },
   {
     id: "piano",
@@ -60,6 +102,20 @@ export const videos: Video[] = [
     avatar: "/avatars/mozart.jpg",
     alt: "Black-and-white cat resting a paw on piano keys",
     tags: ["funny"],
+    subscribers: "54K subscribers",
+    likes: 9700,
+    description: "A tuxedo cat, one white paw, and a room that did not ask for a concert.",
+    commentCount: 418,
+    comments: [
+      {
+        id: "piano-nap",
+        handle: "@napclub",
+        avatar: "/avatars/nap.jpg",
+        when: "10 days ago",
+        text: "Encore. Then a nap.",
+        likes: 1200,
+      },
+    ],
   },
   {
     id: "nap",
@@ -72,6 +128,20 @@ export const videos: Video[] = [
     avatar: "/avatars/nap.jpg",
     alt: "Fluffy long-haired cat asleep on a sunlit rug",
     tags: ["sleepy", "funny"],
+    subscribers: "210K subscribers",
+    likes: 51000,
+    description: "Sunlight, a rug, and a cat who treats sleep like a full-time job.",
+    commentCount: 2304,
+    comments: [
+      {
+        id: "nap-prints",
+        handle: "@littlepawprints",
+        avatar: "/avatars/prints.jpg",
+        when: "1 month ago",
+        text: "This is the career path.",
+        likes: 2400,
+      },
+    ],
   },
   {
     id: "window",
@@ -84,6 +154,20 @@ export const videos: Video[] = [
     avatar: "/avatars/window.jpg",
     alt: "Tabby cat on a windowsill staring at a small bird",
     tags: ["birds", "funny"],
+    subscribers: "97K subscribers",
+    likes: 27300,
+    description: "One bird. One windowsill. The plot thickens every time it hops.",
+    commentCount: 980,
+    comments: [
+      {
+        id: "window-leap",
+        handle: "@adventurewhiskers",
+        avatar: "/avatars/adventure.jpg",
+        when: "2 weeks ago",
+        text: "The bird knows it is a show.",
+        likes: 760,
+      },
+    ],
   },
   {
     id: "leap",
@@ -96,8 +180,36 @@ export const videos: Video[] = [
     avatar: "/avatars/adventure.jpg",
     alt: "Cat mid-leap toward an orange feather toy",
     tags: ["funny"],
+    subscribers: "73K subscribers",
+    likes: 15400,
+    description: "The feather toy moved. The floor did not stand a chance.",
+    commentCount: 705,
+    comments: [
+      {
+        id: "leap-window",
+        handle: "@windowwhiskers",
+        avatar: "/avatars/window.jpg",
+        when: "3 weeks ago",
+        text: "Gravity filed a complaint.",
+        likes: 640,
+      },
+    ],
   },
 ];
+
+export function findVideo(id: string) {
+  return videos.find((video) => video.id === id);
+}
+
+export function isSectionId(value: string | null): value is SectionId {
+  return (
+    value === "home" ||
+    value === "shorts" ||
+    value === "subscriptions" ||
+    value === "watch-later" ||
+    value === "liked"
+  );
+}
 
 export const sectionCopy: Record<Exclude<SectionId, "home">, { title: string; body: string }> = {
   shorts: {

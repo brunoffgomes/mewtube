@@ -1,6 +1,6 @@
 # MeowTube
 
-A warm home page for cat videos. Search by title or channel, filter with chips, and browse a small shelf of whiskered favorites.
+A warm home for cat videos. Search by title or channel, filter with chips, and open a video to watch it with Up next and comments.
 
 ## Run locally
 
