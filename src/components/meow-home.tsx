@@ -78,11 +78,13 @@ export function MeowHome() {
             <Button
               type="button"
               variant="ghost"
-              className="h-11 gap-2 rounded-xl px-1.5 text-[#1c1b22] hover:bg-[#f4efe8]"
+              className="h-12 gap-2.5 rounded-xl px-1.5 text-[#1c1b22] hover:bg-[#f4efe8]"
               onClick={() => selectSection("home")}
             >
               <LogoMark />
-              <span className="text-[1.35rem] font-bold tracking-[-0.03em]">MeowTube</span>
+              <span className="text-[1.65rem] leading-none font-extrabold tracking-[-0.04em]">
+                MeowTube
+              </span>
             </Button>
           </div>
           <div className="ml-auto flex items-center gap-1.5 sm:hidden">
@@ -92,7 +94,7 @@ export function MeowHome() {
             <HeaderActions onNotice={setNotice} />
           </div>
         </div>
-        <div className="px-3 pb-3 sm:absolute sm:top-1/2 sm:left-1/2 sm:w-[min(820px,calc(100%-22rem))] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:px-0 sm:pb-0">
+        <div className="px-3 pb-3 sm:absolute sm:top-1/2 sm:left-1/2 sm:w-[min(920px,calc(100%-17rem))] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:px-0 sm:pb-0">
           <div className="relative">
             <Search
               className="pointer-events-none absolute top-1/2 left-4 size-[18px] -translate-y-1/2 text-[#9a9692]"
@@ -105,7 +107,7 @@ export function MeowHome() {
               placeholder="Search cat videos"
               aria-label="Search cat videos"
               autoComplete="off"
-              className="h-[52px] rounded-full border-transparent bg-[#f3f1ef] pr-4 pl-11 text-[15px] shadow-none placeholder:text-[#9a9692] hover:bg-[#eeebe8] focus-visible:border-[#e36c28]/40 focus-visible:bg-white focus-visible:ring-[#e36c28]/30"
+              className="h-[52px] rounded-full border-transparent bg-[#f3f1ef] pr-5 pl-12 text-base shadow-none placeholder:text-[#9a9692] hover:bg-[#eeebe8] focus-visible:border-[#e36c28]/40 focus-visible:bg-white focus-visible:ring-[#e36c28]/30"
             />
           </div>
         </div>
@@ -170,10 +172,10 @@ function HomeFeed({
 }) {
   return (
     <div>
-      <h1 className="text-[2rem] leading-[1.15] font-bold tracking-[-0.03em] text-[#1c1b22] sm:text-[2.15rem]">
+      <h1 className="text-[2.35rem] leading-[1.12] font-extrabold tracking-[-0.04em] text-[#1c1b22] sm:text-[2.65rem]">
         Your daily dose of cat.
       </h1>
-      <p className="mt-1 text-[15px] text-[#6f6d75]">Good videos. Great whiskers.</p>
+      <p className="mt-1.5 text-[17px] text-[#5e5c64]">Good videos. Great whiskers.</p>
 
       <div
         role="toolbar"
@@ -190,7 +192,7 @@ function HomeFeed({
               aria-pressed={active}
               onClick={() => onChip(item.id)}
               className={cn(
-                "h-10 shrink-0 rounded-full px-4 text-sm font-medium",
+                "h-11 shrink-0 rounded-full px-5 text-[15px] font-medium",
                 active
                   ? "bg-[#e36c28] text-white hover:bg-[#cf5f1e]"
                   : "bg-[#f7f0e8] text-[#3f3c43] hover:bg-[#f0e4d6]",
@@ -266,16 +268,16 @@ function VideoCard({
         <Image
           src={video.avatar}
           alt=""
-          width={40}
-          height={40}
-          className="size-10 shrink-0 rounded-full object-cover"
+          width={44}
+          height={44}
+          className="size-11 shrink-0 rounded-full object-cover"
         />
         <button
           type="button"
           className="min-w-0 flex-1 rounded-lg text-left outline-none focus-visible:ring-2 focus-visible:ring-[#e36c28]"
           onClick={() => onNotice(`Queued ${video.title}`)}
         >
-          <h2 className="line-clamp-2 text-[15px] leading-5 font-semibold text-[#1a1a1f] group-hover:text-[#c65a1c]">
+          <h2 className="line-clamp-2 text-base leading-5 font-semibold text-[#1a1a1f] group-hover:text-[#c65a1c]">
             {video.title}
           </h2>
           <p className="mt-1 text-[13px] leading-4 text-[#5c5856]">{video.channel}</p>
@@ -399,7 +401,7 @@ function SidebarBody({
   ];
 
   return (
-    <div className="flex h-full flex-col pt-3">
+    <div className="flex h-full flex-col pt-6 lg:pt-8">
       <nav className="flex flex-col gap-1 px-3" aria-label="Library">
         {primary.map((item) => (
           <NavButton
@@ -453,7 +455,7 @@ function NavButton({
       aria-current={active ? "page" : undefined}
       onClick={onClick}
       className={cn(
-        "h-12 w-full justify-start gap-4 rounded-2xl px-3 text-[15px] font-medium text-[#2c2a30] hover:bg-[#f6f1ea]",
+        "h-[52px] w-full justify-start gap-4 rounded-2xl px-3.5 text-[15px] font-medium text-[#2c2a30] hover:bg-[#f6f1ea]",
         active && "bg-[#fbe6d6] text-[#e36c28] hover:bg-[#f8dcc8]",
       )}
     >
@@ -570,11 +572,11 @@ function HeaderActions({ onNotice }: { onNotice: (message: string) => void }) {
 
 function LogoMark() {
   return (
-    <svg viewBox="0 0 40 40" className="size-9 shrink-0" aria-hidden>
-      <path fill="#e36c28" d="M8.5 15.5 12.6 6.4c.45-1 1.9-1 2.35 0L17.2 12" />
-      <path fill="#e36c28" d="M22.6 12.2 25 6.4c.45-1 1.9-1 2.35 0l4.15 9.2" />
-      <rect x="5" y="12.5" width="30" height="23" rx="7.5" fill="#e36c28" />
-      <path fill="#fff" d="M16.6 18.2v11.2l9.6-5.6z" />
+    <svg viewBox="0 0 46 42" className="size-10 shrink-0" aria-hidden>
+      <path fill="#e36c28" d="M8 16.5 12.2 6.2c.4-.9 1.7-.9 2.1 0L18.2 15" />
+      <path fill="#e36c28" d="M27.6 15 31.6 6.2c.4-.9 1.7-.9 2.1 0L38 16.5" />
+      <rect x="2" y="13" width="42" height="27" rx="8" fill="#e36c28" />
+      <path fill="#fff" d="M18 19.2v13.2l13.2-6.6z" />
     </svg>
   );
 }
@@ -582,31 +584,16 @@ function LogoMark() {
 function ShortsIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden fill="none">
-      <path
-        d="M8.2 3.8c-2.7 1.3-4.4 3.7-4.4 6.5 0 2.2 1.15 4 2.9 5"
+      <rect
+        x="6.2"
+        y="2.8"
+        width="11.6"
+        height="18.4"
+        rx="5.6"
         stroke="currentColor"
         strokeWidth="1.8"
-        strokeLinecap="round"
       />
-      <path
-        d="M15.8 20.2c2.7-1.3 4.4-3.7 4.4-6.5 0-2.2-1.15-4-2.9-5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M8.6 8.1c1.9.55 3.15 2.05 3.4 3.85.25 1.85-.7 3.45-2.5 4.15"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15.4 15.9c-1.9-.55-3.15-2.05-3.4-3.85-.25-1.85.7-3.45 2.5-4.15"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path fill="currentColor" d="m10.7 10.15 2.55 1.85-2.55 1.85z" />
+      <path fill="currentColor" d="M10.3 8.7v6.6l5.2-3.3z" />
     </svg>
   );
 }
@@ -614,30 +601,22 @@ function ShortsIcon({ className }: { className?: string }) {
 function SubscriptionsIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden fill="none">
-      <path d="M7.5 6.2h9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <rect
-        x="4.2"
-        y="8.4"
-        width="15.6"
-        height="11"
-        rx="2.4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path fill="currentColor" d="M10.4 11.8v4.3l3.7-2.15z" />
+      <path d="M8 4.6h8" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" />
+      <rect x="3.6" y="7.4" width="16.8" height="12.4" rx="2.6" stroke="currentColor" strokeWidth="1.8" />
+      <path fill="currentColor" d="M10 10.6v5.4l4.6-2.7z" />
     </svg>
   );
 }
 
 function PawMark() {
   return (
-    <svg viewBox="0 0 64 64" className="size-8 shrink-0" aria-hidden>
+    <svg viewBox="0 0 64 64" className="size-9 shrink-0" aria-hidden>
       <g fill="#f0a56c">
-        <ellipse cx="14" cy="18" rx="6" ry="8" transform="rotate(-18 14 18)" />
-        <ellipse cx="27" cy="11" rx="6" ry="8" transform="rotate(-6 27 11)" />
-        <ellipse cx="40" cy="11" rx="6" ry="8" transform="rotate(6 40 11)" />
-        <ellipse cx="53" cy="18" rx="6" ry="8" transform="rotate(18 53 18)" />
-        <path d="M18 34c1.2 2 4 12 14 12s12.8-10 14-12c1.4 3.2 1.2 8.4-1.6 12.2C41.2 51.2 36.8 54 32 54s-9.2-2.8-12.4-7.8C16.8 42.4 16.6 37.2 18 34z" />
+        <ellipse cx="12" cy="20" rx="6.2" ry="8.4" transform="rotate(-20 12 20)" />
+        <ellipse cx="26" cy="12" rx="6.2" ry="8.6" transform="rotate(-6 26 12)" />
+        <ellipse cx="40" cy="12" rx="6.2" ry="8.6" transform="rotate(6 40 12)" />
+        <ellipse cx="54" cy="20" rx="6.2" ry="8.4" transform="rotate(20 54 20)" />
+        <path d="M16 34c1.5 1.2 4.2 3.2 8.2 3.6 2.6.2 5 .2 7.6-.2 3.6-.6 6.4-2.2 8.4-3.4 2.2 4.2 2 10.2-.6 14.6-2.8 4.6-7.6 7.4-12.6 7.4s-9.8-2.8-12.6-7.4c-2.6-4.4-2.8-10.4-.4-14.6z" />
       </g>
     </svg>
   );
